@@ -1,5 +1,9 @@
 import csv
 
+with open('graph.csv', newline='') as csvfile:
+    data = list(csv.reader(csvfile))
+
+# @profile
 class Graph:
     def __init__(self):
         pass
@@ -15,18 +19,16 @@ class Graph:
                 val = E[i]
         return val
 
-
     def process(self):
-        T = [False] * self.size
-        L = []
-        E = []
+        lSize = self.size
+        T, L, E = [False] * lSize, [], []
 
-        for i in range(self.size):
+        for i in range(lSize):
             if i == 0:
                 T[i] = True
             else:
-                for j in range(self.size):
-                    for k in range(j, self.size):
+                for j in range(lSize):
+                    for k in range(j, lSize):
                         if T[j] != T[k]:
                             E.append([j, k, self.data[j][k]])
                 targetEdge = self.findMinimum(E)
@@ -43,8 +45,7 @@ class Graph:
 
 
 
-with open('graph.csv', newline='') as csvfile:
-    data = list(csv.reader(csvfile))
+
 
 g = Graph()
 # g.read(
